@@ -2,10 +2,13 @@ require('dotenv').config();
 const express = require('express')
 const app = express()
 const cors = require('cors');
-
 const connectToDB = require('./db/connect')
 
 const taskRoute = require('./routes/tasks')
+
+// Connection URI
+const uri = process.env.URI; // Use the environment variable for the MongoDB URI
+const dbName = process.env.DB_NAME; // Use the environment variable for the MongoDB DB_NAME
 
 // middleware
 app.use(express.json())
@@ -29,10 +32,9 @@ app.use('/api/v1/tasks', taskRoute)
 // app.delete('/api/vi/tasks/:id')  - delete task
 
 
-
 const startApp = async () => {
     try {
-        await connectToDB()
+        await connectToDB(`${uri}/${dbName}`)
         app.listen(port , () => {
             console.log(`Server listening to ${port}...`);
         })
