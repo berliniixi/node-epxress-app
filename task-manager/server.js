@@ -3,6 +3,8 @@ const express = require('express')
 const app = express()
 const cors = require('cors');
 
+const connectToDB = require('./db/connect')
+
 const taskRoute = require('./routes/tasks')
 
 // middleware
@@ -27,6 +29,17 @@ app.use('/api/v1/tasks', taskRoute)
 // app.delete('/api/vi/tasks/:id')  - delete task
 
 
-app.listen(port , () => {
-    console.log(`Server listening to ${port}...`);
-})
+
+const startApp = async () => {
+    try {
+        await connectToDB()
+        app.listen(port , () => {
+            console.log(`Server listening to ${port}...`);
+        })
+
+    } catch (error) {
+        console.log("start app error: ", error);
+    }
+}
+
+startApp()
