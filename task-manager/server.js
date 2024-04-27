@@ -1,14 +1,21 @@
+require('dotenv').config();
 const express = require('express')
 const app = express()
+const cors = require('cors');
 
 const taskRoute = require('./routes/tasks')
 
 // middleware
 app.use(express.json())
 
+// Allow requests only from this origin
+app.use(cors({
+    origin: process.env.ORIGIN,
+    // allowedHeaders: ['Content-Type', 'Authorization']
+  }));
 
 // port
-const port = 3000
+const port = process.env.PORT || 4000
 
 // routes
 app.use('/api/v1/tasks', taskRoute)
