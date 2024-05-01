@@ -4,6 +4,8 @@ const app = express()
 const cors = require('cors');
 const connectToDB = require('./db/connect')
 
+const notFound = require('./middleware/not-found')
+
 const taskRoute = require('./routes/tasks')
 
 // Connection URI
@@ -31,6 +33,8 @@ app.use('/api/v1/tasks', taskRoute)
 // app.patch('/api/vi/tasks/:id')  - update task
 // app.delete('/api/vi/tasks/:id')  - delete task
 
+
+app.use(notFound)
 
 const startApp = async () => {
     try {
