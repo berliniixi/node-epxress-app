@@ -5,6 +5,7 @@ const cors = require('cors');
 const connectToDB = require('./db/connect')
 
 const notFound = require('./middleware/not-found')
+const errorHandlerMiddleware = require('./middleware/error-handler')
 
 const taskRoute = require('./routes/tasks')
 
@@ -25,7 +26,9 @@ app.use(cors({
 const port = process.env.PORT || 4000
 
 // routes
-app.use('/api/v1/tasks', taskRoute)
+app.use('/api/v1/tasks' ,taskRoute)
+// task route middleware
+app.use(errorHandlerMiddleware)
 
 // app.get('/api/vi/tasks')  - get all the task
 // app.post('/api/vi/tasks')  - create a new task

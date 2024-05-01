@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
  
-// middlewares
+// controllers
 const {getAllTasks,createTask,getTaskById,updateTaskById,deleteTaskById} = require('../controllers/tasks')
 
 // routes
