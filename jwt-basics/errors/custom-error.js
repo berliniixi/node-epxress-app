@@ -1,4 +1,4 @@
-class CustomPIError extends Error {
+class CustomAPIError extends Error {
     constructor(message,statusCode) {
         super(message)
         this.statusCode = statusCode
@@ -6,7 +6,7 @@ class CustomPIError extends Error {
 } 
 
 const createCustomError = (msg,statusCode) => {
-    return new CustomPIError(msg, statusCode)
+    return new CustomAPIError(msg, statusCode)
 }
 
-module.exports = {createCustomError, CustomPIError}
+module.exports = {createCustomError, CustomAPIError}

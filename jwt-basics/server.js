@@ -11,6 +11,9 @@ const express = require('express')
 const app = express()
 
 
+// routes
+const mainRoute = require('./routes/main')
+
 const notFound = require('./middleware/not-found')
 const errorHandlerMiddleware = require('./middleware/error-handler')
 
@@ -23,13 +26,15 @@ const uri = process.env.URI
 const dbName = process.env.DB_NAME
 
 // url 
-const url = `${uri}/${dbName}`
+// const url = `${uri}/${dbName}`
 
 
 // routes
-app.get('/' , (req,res) => {
-    res.send('<h1>Login/Register</h1>')
-})
+// app.get('/' , (req,res) => {
+//     res.send('<h1>Login/Register</h1>')
+// })
+
+app.use('/api/v1', mainRoute)
 
 app.use(notFound)
 app.use(errorHandlerMiddleware)
@@ -38,7 +43,7 @@ app.use(errorHandlerMiddleware)
 const startApp = async () => {
     try {
         // connect DB 
-        await connectToDB(url)
+        // await connectToDB(url)
         // server
         app.listen(port , () => {
             console.log(`Server listening to ${port}...`);
